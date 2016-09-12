@@ -49,10 +49,10 @@ namespace crier {
           InboundDispatching default_inbound_dispatch = InboundDispatching::Immediate);
     
     Crier(const Crier& copy) = delete;
-    Crier(const Crier&& copy) = delete;
+    Crier(Crier&& copy) = delete;
     
     void operator=(const Crier& copy) = delete;
-    void operator=(const Crier&& copy) = delete;
+    void operator=(Crier&& copy) = delete;
     
     ~Crier();
     
