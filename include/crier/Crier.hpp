@@ -45,7 +45,14 @@ namespace crier {
     using TimeoutList = typename std::list< TimeoutData >;
     
   public:
+    // Construction will default instantiate an object of the Transport type
     Crier(UnhandledMessageBehaviour default_unhandled_behaviour = UnhandledMessageBehaviour::Ignore,
+          InboundDispatching default_inbound_dispatch = InboundDispatching::Immediate);
+
+    // If the transport needed to be initialized with extra parameters before giving up control to crier
+    // Use this contructor. A copy constructor must be defined for the Transport class.
+    // Move, instead of copy construction will be used, if the Transport class supports it.
+    Crier(Transport&& transport, UnhandledMessageBehaviour default_unhandled_behaviour = UnhandledMessageBehaviour::Ignore,
           InboundDispatching default_inbound_dispatch = InboundDispatching::Immediate);
     
     Crier(const Crier& copy) = delete;
