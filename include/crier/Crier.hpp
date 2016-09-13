@@ -94,9 +94,9 @@ namespace crier {
     
     void setInboundDispatchingForSocketClosed(InboundDispatching behaviour);
     
-    void setInboundDispatchingForSocketOpenToDefault(InboundDispatching behaviour);
+    void setInboundDispatchingForSocketOpenToDefault();
     
-    void setInboundDispatchingForSocketClosedToDefault(InboundDispatching behaviour);
+    void setInboundDispatchingForSocketClosedToDefault();
     
     InboundDispatching getInboundDispatchingForMsg(const std::string& type);
     
