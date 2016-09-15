@@ -19,7 +19,7 @@ namespace crier {
   template <typename Transport, typename ProtoContainerMsg>
   Crier<Transport, ProtoContainerMsg>::Crier(Transport&& transport, UnhandledMessageBehaviour default_unhandled_behaviour,
           InboundDispatching default_inbound_dispatch) :
-  _transport(transport), _timeoutIds(0), _default_unhandled_behaviour(default_unhandled_behaviour), _default_inbound_dispatch(default_inbound_dispatch), 
+  _transport(new Transport(std::move(transport))), _timeoutIds(0), _default_unhandled_behaviour(default_unhandled_behaviour), _default_inbound_dispatch(default_inbound_dispatch), 
   _inboundDispatchTransportOpenSetting(default_inbound_dispatch), _inboundDispatchTransportErrorSetting(default_inbound_dispatch), 
   _supressNextTransportClosed(false), _custom_serialization_fun(nullptr), _custom_deserialization_fun(nullptr) {
     _transport->setOnConnectCallback([this](){ OnTransportConnect(); });
