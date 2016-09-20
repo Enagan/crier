@@ -4,9 +4,9 @@
 #include <string>
 #include <functional>
 
-#include "crier/Transport.hpp"
+#include "crier/TransportConcept.hpp"
 
-class DummyTransport : public crier::Transport {
+class DummyTransport : public crier::TransportConcept {
 public:
   void connect(const std::string& host, int ip);
   void disconnect();

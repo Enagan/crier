@@ -5,7 +5,7 @@
 #include <functional>
 
 namespace crier {
-  class Transport {
+  class TransportConcept {
   public:
     virtual void connect(const std::string& host, int ip) = 0;
     virtual void disconnect() = 0;
