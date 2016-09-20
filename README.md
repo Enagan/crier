@@ -37,10 +37,15 @@ message test2 {
 }
 
 /// Root message required for Crier to function
-/// Should be a message with optional fields for each other message defined in the protobuf file
+/// Should be a message with optional fields for each other message defined in the protobuf file.
+/// You can have multiple "root_msg" in the same protobuf files, and the instance a different crier instance to work each different root message
 message root_msg { 
-    optional test1 test1_field = 1;              
-    optional test2 test2_field = 2;
+    optional test1 test1_field = 1; // Any message that isn't here won't be considered by the crier working with this root message
+    optional test2 test2_field = 2; // Fields can have any name you want, you'll never directly interact with them.
+
+    // Crier supports protobuf extensions, you can leave your root message extensible and add more messages to it, these will be automatically recognized and dealt with
+    // and will be usable just as if they were declared here.
+    extensions 5 to 10;
 }
 ```
 
