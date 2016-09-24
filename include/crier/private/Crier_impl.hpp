@@ -174,12 +174,12 @@ namespace crier {
   
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
-  void Crier<Transport, ProtoRootMsg>::setUnhandledBehaviourForMsg(UnhandledMessageBehaviour behaviour, bool clearQueue) {
+  void Crier<Transport, ProtoRootMsg>::setUnhandledBehaviourForMsg(UnhandledMessageBehaviour behaviour) {
     std::string ret_type = Msg().GetDescriptor()->full_name();
     std::lock_guard<std::mutex> guardBehaviour(_unhandledBehaviourSettingsMutex);
     _unhandledBehaviourSettings[ret_type] = behaviour;
-    
-    if (clearQueue || behaviour == UnhandledMessageBehaviour::Ignore) {
+
+    if (behaviour == UnhandledMessageBehaviour::Ignore) {
       std::lock_guard<std::mutex> guardQueue(_unhandledMessageQueueMutex);
       _unhandledMessageQueue[ret_type].clear();
     }
@@ -187,8 +187,8 @@ namespace crier {
   
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
-  void Crier<Transport, ProtoRootMsg>::setUnhandledBehaviourForMsgToDefault(bool clearQueue) {
-    setUnhandledBehaviourForMsg<Msg>(_default_unhandled_behaviour, clearQueue);
+  void Crier<Transport, ProtoRootMsg>::setUnhandledBehaviourForMsgToDefault() {
+    setUnhandledBehaviourForMsg<Msg>(_default_unhandled_behaviour);
   }
   
   template <typename Transport, typename ProtoRootMsg>

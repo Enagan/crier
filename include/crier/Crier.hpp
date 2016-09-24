@@ -158,10 +158,10 @@ namespace crier {
 // -- Unhandled Behaviour
   public:
     template <typename Msg>
-    void setUnhandledBehaviourForMsg(UnhandledMessageBehaviour behaviour, bool clearQueue = false);
+    void setUnhandledBehaviourForMsg(UnhandledMessageBehaviour behaviour);
 
     template <typename Msg>
-    void setUnhandledBehaviourForMsgToDefault(bool clearQueue = false);
+    void setUnhandledBehaviourForMsgToDefault();
 
 // -- Threading Behaviour
     template <typename Msg>
