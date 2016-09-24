@@ -170,16 +170,10 @@ namespace crier {
     template <typename Msg>
     void setInboundDispatchingForMsgToDefault();
 
-    void setInboundDispatchingForSocketOpen(InboundDispatching behaviour);
-
-    void setInboundDispatchingForSocketClosed(InboundDispatching behaviour);
-
-    void setInboundDispatchingForSocketOpenToDefault();
-
-    void setInboundDispatchingForSocketClosedToDefault();
-
-    InboundDispatching getInboundDispatchingForMsg(const std::string& type);
-
+    void setInboundDispatchingForTransportOpen(InboundDispatching behaviour);
+    void setInboundDispatchingForTransportClosed(InboundDispatching behaviour);
+    void setInboundDispatchingForTransportOpenToDefault();
+    void setInboundDispatchingForTransportClosedToDefault();
     void dispatchQueuedCallbacks();
 
 // -- Transport Error Callback Supression

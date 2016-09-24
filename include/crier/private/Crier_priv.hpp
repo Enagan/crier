@@ -47,6 +47,9 @@ public:
   void OnTransportData(const std::string& data);
   void OnTransportDisconnect(const std::string& err);
   
+  // --- Inbound Dispatching
+  InboundDispatching getInboundDispatchingForMsg(const std::string& type);
+
   // - Utils
   inline void logEmptyMessageError();
   template <typename CallbackType>

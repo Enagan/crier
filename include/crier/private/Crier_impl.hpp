@@ -206,22 +206,22 @@ namespace crier {
   }
   
   template <typename Transport, typename ProtoRootMsg>
-  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForSocketOpen(InboundDispatching behaviour) {
+  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportOpen(InboundDispatching behaviour) {
     _inboundDispatchTransportOpenSetting = behaviour;
   }
   
   template <typename Transport, typename ProtoRootMsg>
-  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForSocketClosed(InboundDispatching behaviour) {
+  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportClosed(InboundDispatching behaviour) {
     _inboundDispatchTransportErrorSetting = behaviour;
   }
   
   template <typename Transport, typename ProtoRootMsg>
-  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForSocketOpenToDefault() {
+  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportOpenToDefault() {
     _inboundDispatchTransportOpenSetting = _default_inbound_dispatch;
   }
   
   template <typename Transport, typename ProtoRootMsg>
-  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForSocketClosedToDefault() {
+  void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportClosedToDefault() {
     _inboundDispatchTransportErrorSetting = _default_inbound_dispatch;
   }
   
