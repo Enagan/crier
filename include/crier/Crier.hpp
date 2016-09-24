@@ -122,6 +122,7 @@ namespace crier {
                                                 unsigned int milliseconds_to_timeout, const std::function<void()>& onTimeout);
 
 // -- Permanent Messsage Callbacks
+// Methods to deal with permanent callbacks for protobuf messages.
 
     /// Registers a permanent callback to run every time a message of type RetMsgData arrives through the transport.
     //  - priority is an optional template parameter that controls when the callback will be invoked in relation to other callbacks registered for the same RetMsgData.
@@ -129,7 +130,7 @@ namespace crier {
     //    You can register two callbacks for the same message in different priorities, and they will run as expected in relation to one another.
     //  - key should be an unique identifier for the callback being registered. This key is for later use in clearing the callback away. If two callbacks are registered for the same
     //    RetMsgData using the same key, the second will overwrite the first. (The same key can be used for two different RetMsgData).
-    //  - onSuccess is the callback to be called upon arrival of the RetMsgData.
+    //  - onSuccess is the callback to be invoked upon arrival of the RetMsgData.
     template <typename RetMsgData, CallbackPriority priority = CallbackPriority::NORMAL>
     void registerPermanentCallback(const std::string& key, const std::function<void(const RetMsgData&)>& onSuccess);
 
@@ -143,56 +144,141 @@ namespace crier {
     void clearCallbacksForMsg();
 
 // -- Transport Event Callbacks
+// Methods to deal with permanent callbacks for transport events.
+
+    /// Registers a permanent callback to run every time the Transport is successfully connected (will trigger when your Transport Concept implementation calls it's
+    /// _on_connect_cb, so it's up to the implementer to define what a Transport connected means).
+    //  - priority is an optional template parameter that controls when the callback will be invoked in relation to other callbacks registered for Transport open.
+    //    There are three available priorities, FIRST, ASAP and NORMAL. All callbacks for FIRST will run before any ASAP callback, and the same applies between ASAP and NORMAL.
+    //    You can register two different callbacks in different priorities, and they will run as expected in relation to one another.
+    //  - key should be an unique identifier for the callback being registered. This key is for later use in clearing the callback away. If two callbacks are registered at the same
+    //    priority level using the same key, the second will overwrite the first.
+    //  - onConnect is the callback to be invoked when the transport connected event happens.
     template <CallbackPriority priority = CallbackPriority::NORMAL>
     void registerForTransportOpenedCallback(const std::string &key, const std::function<void()>& onConnect);
 
+    /// Registers a permanent callback to run every time the Transport is disconnected (will trigger when your Transport Concept implementation calls it's
+    /// _on_disconnect_cb, so it's up to the implementer to define what a Transport disconnect means).
+    //  - priority is an optional template parameter that controls when the callback will be invoked in relation to other callbacks registered for transport disconnect.
+    //    There are three available priorities, FIRST, ASAP and NORMAL. All callbacks for FIRST will run before any ASAP callback, and the same applies between ASAP and NORMAL.
+    //    You can register two different callbacks in different priorities, and they will run as expected in relation to one another.
+    //  - key should be an unique identifier for the callback being registered. This key is for later use in clearing the callback away. If two callbacks are registered at the same
+    //    priority level using the same key, the second will overwrite the first.
+    //  - onDisconnect is the callback to be invoked when the transport disconnect event happens. It must receive a string as input parameter which is passed from the Transport Concept
+    //    it's purpose is to describe the error which caused the disconnect in some way.
     template <CallbackPriority priority = CallbackPriority::NORMAL>
     void registerForTransportClosedCallback(const std::string &key, const std::function<void(const std::string&)>& onDisconnect);
 
+    /// Clears a permanent callback that was set to run when transport connected event is triggered.
+    // To correctly clear a callback, make sure that the template argument for the priority is the same, as well as the key used.
     template <CallbackPriority priority = CallbackPriority::NORMAL>
     void clearTransportOpenedCallback(const std::string &key);
 
+    /// Clears a permanent callback that was set to run when transport disconnect event is triggered.
+    // To correctly clear a callback, make sure that the template argument for the priority is the same, as well as the key used.
     template <CallbackPriority priority = CallbackPriority::NORMAL>
     void clearTransportClosedCallback(const std::string &key);
 
 // -- Unhandled Behaviour
-  public:
+// Methods to modify crier's unhandled behaviour for messages and transport events.
+
+    /// Set a specific unhandled behaviour for messages of type Msg, to override the option set as default.
+    /// The unhandled behaviour describes what crier should do when a message of type Msg arrives, but no callback (temporary of permanent) is registered to listen.
+    /// Ignore will simply discard the message, Enqueue will save the message in a queue to be dispatched when the first permanent callback for it is registered.
+    /// Whenever the behaviour is set to ignore, the current queue of messages of type Msg will be cleared.
     template <typename Msg>
     void setUnhandledBehaviourForMsg(UnhandledMessageBehaviour behaviour);
 
+    /// Resets the unhandled behaviour for messages of type Msg to the default set when constructing the crier instance.
     template <typename Msg>
     void setUnhandledBehaviourForMsgToDefault();
 
-// -- Threading Behaviour
+// -- Inbound Dispatching Behaviour
+// Methods to modify crier's dispatching behaviour for messages and transport events.
+
+    /// Set a specific dispatching behaviour for messages of type Msg, to override the option set as default.
+    /// The dispatching behaviour describes how crier should invoke callbacks when a message of type Msg arrives.
+    //  Immediate will call the lambdas as soon as messages arrive through the transport. This means, for example, if your transport inbound runs on a separate thread,
+    //  your callbacks will run on that thread (crier is thread-safe, but the side-effects of your callbacks might not be, so take care).
+    //  DispatchQueue will save the callbacks in a queue which is only dispatched when (and where) you call the 'dispatchQueuedCallbacks' method.
     template <typename Msg>
     void setInboundDispatchingForMsg(InboundDispatching behaviour);
 
+    /// Resets the dispatching behaviour for messages of type Msg to the default set when constructing the crier instance.
     template <typename Msg>
     void setInboundDispatchingForMsgToDefault();
 
+    /// Set a specific dispatching behaviour for the transport open event, to override the option set as default.
+    /// The dispatching behaviour describes how crier should invoke callbacks when the transport open event is triggered.
+    //  Immediate will call the lambdas as soon as the event is triggered in the transport (when calling _on_connect_cb).
+    //  This means, for example, if your transport inbound runs on a separate thread, your callbacks will run on that thread
+    //  (crier is thread-safe, but the side-effects of your callbacks might not be, so take care).
+    //  DispatchQueue will save the callbacks in a queue which is only dispatched when (and where) you call the 'dispatchQueuedCallbacks' method.
     void setInboundDispatchingForTransportOpen(InboundDispatching behaviour);
+
+    /// Set a specific dispatching behaviour for the transport closed event, to override the option set as default.
+    /// The dispatching behaviour describes how crier should invoke callbacks when the transport closed event is triggered.
+    //  Immediate will call the lambdas as soon as the event is triggered in the transport (when calling _on_disconnect_cb).
+    //  This means, for example, if your transport inbound runs on a separate thread, your callbacks will run on that thread
+    //  (crier is thread-safe, but the side-effects of your callbacks might not be, so take care).
+    //  DispatchQueue will save the callbacks in a queue which is only dispatched when (and where) you call the 'dispatchQueuedCallbacks' method.
     void setInboundDispatchingForTransportClosed(InboundDispatching behaviour);
+
+    /// Resets the dispatching behaviour for the transport open event to the default set when constructing the crier instance.
     void setInboundDispatchingForTransportOpenToDefault();
+
+    /// Resets the dispatching behaviour for the transport closed event to the default set when constructing the crier instance.
     void setInboundDispatchingForTransportClosedToDefault();
+
+    /// Invokes any pending callbacks for messages or transport events that are running using the 'DispatchQueue' inbound dispatching option. Callbacks will be invoked in arrival order.
+    /// Usefull if you want to control the time and place your external messages are treated.
+    /// This method must be called if any messages or events are running with dispatch queue, otherwise their callbacks will never be called.
+    //  Keep in mind that messages will be kept in memory waiting for this call. If you receive large messages very frequently, and you have them placed in the dispatch queue, but you don't call
+    //  this method very often, you might see an impact in memory used. Similarly, if you have messages entering the queue but you never dispatch, your application will eventually eat all the memory
+    //  it can and your OS of choice will most likely kill it. You´ve been warned.
     void dispatchQueuedCallbacks();
 
+// --- Advanced API
+// Methods you should be careful when using, as they might have catastrophic outcomes when mis-used
+
 // -- Transport Error Callback Supression
+// Suppressing transport closed events in specific situations
+
+    /// There are certain situations when it's desireable to define formal disconnect messages in the protocol (that probably describe the disconnect cause).
+    /// These messages are most likely immediately followed by a disconnect in the socket.
+    /// This however might be bothersome if you have registered callbacks for both the disconnect message and the transport closed event, since you are now
+    /// treating the same disconnect in different places and most likely different contexts.
+    /// This option allows you to select a message type, that upon arrival, will suppress the next transport closed event trigger, allowing you to treat formal
+    /// disconnects as well as unexpected ones in a cleaner way.
+    //  Keep in mind that crier doesn't keep a timer on this suppression. If the transport closed event takes 10 minutes, it will be suppressed.
+    //  If this is used with a message that doesn't always result in a transport closed, behaviour can be potential awkward and not what you expected.
+    //  (As in, you might miss an event you should not have).
     template <typename Msg>
     void supressTransportClosedAfterMsgOfType();
 
+    /// Turns off the transport closed supressing behaviour
     void clearSupressionTransportClosed();
 
 // -- Serialization Processing
+// When you require a more refined Serialization rather than just calling protobuf's SerializeToString.
+
+    /// Sets a function to be called whenever crier needs to Serialize a ProtoRootMsg. Receives a ProtoRootMsg and should return a string with the serialized data.
+    /// By default crier will call protobuf's SerializeToString. If you require something more sophisticated, then pass the function with your serialization process.
     void SetCustomSerializationFun(const std::function<std::string(const ProtoRootMsg&)>& fun);
+
+    /// Clears away the set custom serialization function, returning to crier's base behaviour of just calling protobuf's SerializeToString.
     void ClearCustomSerializationFun();
 
+    /// Sets a function to be called whenever crier attempts to deserialize a string into a ProtoRootMsg. Receives a string and should return a ProtoRootMsg deserialized from the string.
+    /// By default crier will call protobuf's ParseFromString. If you require something more sophisticated, then pass the function with your deserialization process.
     void SetCustomDeserializationFun(const std::function<ProtoRootMsg(const std::string&)>& fun);
+
+    /// Clears away the set custom deserialization function, returning to crier's base behaviour of just calling protobuf's ParseFromString.
     void ClearCustomDeserializationFun();
 
   private:
 #include <crier/private/Crier_priv.hpp>
   };
-
 }
 
 #include <crier/private/Crier_impl.hpp>
