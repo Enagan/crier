@@ -70,13 +70,13 @@ namespace crier {
 // Methods to directly deal with the transport instance owned by crier
 
     /// Connects the transport to the given ip and port (will call the void 'connect(const std::string& host, int ip)' on your Transport concept implementation)
-    void ConnectTransport(const std::string& ip, unsigned int port);
+    void connectTransport(const std::string& ip, unsigned int port);
 
     /// Disconnects the transport from whichever active connection it currently has (will call the void 'void disconnect()' on your Transport concept implementation)
-    void DisconnectTransport();
+    void disconnectTransport();
 
     /// Returns true if the Transport has an active connection, false otherwise (will call the void 'bool isConnected()' on your Transport concept implementation)
-    bool TransportConnected() const;
+    bool transportConnected() const;
 
     /// Gets a reference to the crier managed transport instance. Typically you shouldn't mess with it during regular usage, but it's available for edge cases
     Transport& transport();
