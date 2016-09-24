@@ -8,4 +8,4 @@ outputDir="../src"
 
 echo "Updating Protocol"
 
-./protoc -I=$inputFileDir --cpp_out=$outputDir $inputFileDir/$inputFile
+protoc -I=$inputFileDir --cpp_out=$outputDir $inputFileDir/$inputFile
