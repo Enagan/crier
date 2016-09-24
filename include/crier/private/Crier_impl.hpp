@@ -171,7 +171,7 @@ namespace crier {
       }
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
   void Crier<Transport, ProtoRootMsg>::setUnhandledBehaviourForMsg(UnhandledMessageBehaviour behaviour) {
@@ -184,13 +184,13 @@ namespace crier {
       _unhandledMessageQueue[ret_type].clear();
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
   void Crier<Transport, ProtoRootMsg>::setUnhandledBehaviourForMsgToDefault() {
     setUnhandledBehaviourForMsg<Msg>(_default_unhandled_behaviour);
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
   void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForMsg(InboundDispatching behaviour) {
@@ -198,33 +198,33 @@ namespace crier {
     std::lock_guard<std::mutex> guardBehaviour(_inboundDispatchSettingsMutex);
     _inboundDispatchSettings[ret_type] = behaviour;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
   void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForMsgToDefault() {
     setInboundDispatchingForMsg<Msg>(_default_inbound_dispatch);
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportOpen(InboundDispatching behaviour) {
     _inboundDispatchTransportOpenSetting = behaviour;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportClosed(InboundDispatching behaviour) {
     _inboundDispatchTransportErrorSetting = behaviour;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportOpenToDefault() {
     _inboundDispatchTransportOpenSetting = _default_inbound_dispatch;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::setInboundDispatchingForTransportClosedToDefault() {
     _inboundDispatchTransportErrorSetting = _default_inbound_dispatch;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   InboundDispatching Crier<Transport, ProtoRootMsg>::getInboundDispatchingForMsg(const std::string& type) {
     std::lock_guard<std::mutex> guard(_inboundDispatchSettingsMutex);
@@ -233,7 +233,7 @@ namespace crier {
     }
     return _default_inbound_dispatch;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::dispatchQueuedCallbacks() {
     std::deque<std::function<void()>> mainThreadCallbacksAux;
@@ -247,7 +247,7 @@ namespace crier {
       callback();
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
   void Crier<Transport, ProtoRootMsg>::clearCallbacksForMsg() {
@@ -255,7 +255,7 @@ namespace crier {
     std::lock_guard<std::mutex> guard(_callbackMapMutex);
     _callbackMap[ret_type].clear();
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename RetMsgData, CallbackPriority priority>
   void Crier<Transport, ProtoRootMsg>::registerPermanentCallback(const std::string &key, const std::function<void(const RetMsgData&)>& onSuccess) {
@@ -265,10 +265,10 @@ namespace crier {
       _permanentObserverMap[ret_type][{key, priority}] = [onSuccess](google::protobuf::Message* received_msg){
         onSuccess(*(dynamic_cast<RetMsgData*>(received_msg)));};
     }
-    
+
     treatQueuedMessagesForType(ret_type);
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename RetMsgData, CallbackPriority priority>
   void Crier<Transport, ProtoRootMsg>::clearPermanentCallback(const std::string &key){
@@ -276,47 +276,47 @@ namespace crier {
     std::lock_guard<std::mutex> guard(_permanentObserverMapMutex);
     _permanentObserverMap[ret_type].erase({key, priority});
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <CallbackPriority priority>
   void Crier<Transport, ProtoRootMsg>::registerForTransportClosedCallback(const std::string &key, const std::function<void(const std::string&)>& onDisconnect) {
     std::lock_guard<std::mutex> guard(_transportClosedObserverMapMutex);
     _transportClosedObserverMap[{key, priority}] = onDisconnect;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <CallbackPriority priority>
   void Crier<Transport, ProtoRootMsg>::clearTransportClosedCallback(const std::string &key) {
     std::lock_guard<std::mutex> guard(_transportClosedObserverMapMutex);
     _transportClosedObserverMap.erase({key, priority});
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <CallbackPriority priority>
   void Crier<Transport, ProtoRootMsg>::registerForTransportOpenedCallback(const std::string &key, const std::function<void()>& onConnect) {
     std::lock_guard<std::mutex> guard(_transportOpenedObserverMapMutex);
     _transportOpenedObserverMap[{key, priority}] = onConnect;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <CallbackPriority priority>
   void Crier<Transport, ProtoRootMsg>::clearTransportOpenedCallback(const std::string &key) {
     std::lock_guard<std::mutex> guard(_transportOpenedObserverMapMutex);
     _transportOpenedObserverMap.erase({key, priority});
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename Msg>
   void Crier<Transport, ProtoRootMsg>::supressTransportClosedAfterMsgOfType() {
     std::string ret_type = Msg().GetDescriptor()->full_name();
     _transportClosedSupressors[ret_type] = true;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::clearSupressionTransportClosed() {
     _transportClosedSupressors.clear();
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::unhandledMessage(const ProtoRootMsg& r, const std::string& type, UnhandledMessageBehaviour behaviour) {
     if(behaviour == UnhandledMessageBehaviour::Ignore)
@@ -326,24 +326,24 @@ namespace crier {
       _unhandledMessageQueue[type].push_back(r); // TODO NEEDS DEEP COPY
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::callOnMainThread(const std::function<void()>& callback) {
     std::lock_guard<std::mutex> guard(_mainThreadCallbacksMapMutex);
     _mainThreadCallbacksMap.push_back(callback);
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::receiveMessage(const ProtoRootMsg& r, google::protobuf::Message* received_msg) {
     std::string type = received_msg->GetDescriptor()->full_name();
     invalidateFirstTimeout(type);
-    
+
     if(_transportClosedSupressors[type])
       _supressNextTransportClosed = true;
-    
+
     // Get the threading behaviour for this message, to define where it should be called on (main thread, or helper thread)
     InboundDispatching behaviour = getInboundDispatchingForMsg(type);
-    
+
     if(behaviour == InboundDispatching::Immediate) {
       triggerCallbacksForMsg(r, received_msg);
     }
@@ -355,7 +355,7 @@ namespace crier {
       });
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::triggerCallbacksForMsg(const ProtoRootMsg& r, google::protobuf::Message* received_msg) {
     std::string type = received_msg->GetDescriptor()->full_name();
@@ -368,10 +368,10 @@ namespace crier {
     }
     for (const auto& permObserver : permanentObserverList) {
       permObserver(received_msg);
-      
+
       no_callbacks = false;
     }
-    
+
     /// Call first Temporary callback
     _callbackMapMutex.lock();
     // This has some unexpected behaviour: if there are two requests made in succession, the first without a callback and the second with a callback,
@@ -384,12 +384,12 @@ namespace crier {
     } else {
       _callbackMapMutex.unlock();
     }
-    
+
     if(no_callbacks) {
       dealWithUnhandledMessage(r, type);
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::dealWithUnhandledMessage(const ProtoRootMsg& r, const std::string& type) {
     UnhandledMessageBehaviour unhandled_behaviour = _default_unhandled_behaviour;
@@ -401,7 +401,7 @@ namespace crier {
     }
     unhandledMessage(r, type, unhandled_behaviour);
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::OnTransportData(const std::string& data) {
     ProtoRootMsg container_msg;
@@ -416,41 +416,41 @@ namespace crier {
     if(msg_data != nullptr)
       receiveMessage(container_msg, msg_data);
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   google::protobuf::Message* Crier<Transport, ProtoRootMsg>::openReq(const ProtoRootMsg& r) {
-    
+
     const google::protobuf::Reflection *refl = r.GetReflection();
-    
+
     std::vector< const google::protobuf::FieldDescriptor *> pOut;
-    
+
     refl->ListFields( r, &pOut );
-    
+
     for( auto const &field : pOut )
     {
       if( field == nullptr ) { continue; };
-      
+
       google::protobuf::Message* msgPointer = refl->MutableMessage((google::protobuf::Message*)&r, field);
       return msgPointer;
     }
-    
+
     logEmptyMessageError();
     return nullptr;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename MsgData>
   void Crier<Transport, ProtoRootMsg>::packageIntoReq(ProtoRootMsg& req, const MsgData& data) {
-    
+
     const google::protobuf::Descriptor* data_desc	= data.GetDescriptor();
     const google::protobuf::Descriptor* req_desc	= req.GetDescriptor();
     const google::protobuf::Reflection* req_refl	= req.GetReflection();
-    
+
     int fieldCount = req_desc->field_count();
     for( int i = 0; i<fieldCount; i++ )
     {
       const google::protobuf::FieldDescriptor *field = req_desc->field(i);
-      
+
       if(( field->type() == google::protobuf::FieldDescriptor::TYPE_MESSAGE ) && ( field->message_type()->full_name() == data_desc->full_name() ))
       {
         MsgData* msgPointer = (MsgData*)req_refl->MutableMessage((google::protobuf::Message*)&req, field);
@@ -458,15 +458,15 @@ namespace crier {
         return;
       }
     }
-    
+
     // Search through Extensions at File Level:
     auto file_data_desc = data_desc->file();
-    
+
     int extCount = file_data_desc->extension_count();
     for( int i = 0; i < extCount; i++ )
     {
       const google::protobuf::FieldDescriptor *field = file_data_desc->extension(i);
-      
+
       if(( field->type() == google::protobuf::FieldDescriptor::TYPE_MESSAGE ) &&
          ( field->containing_type()->full_name() == req_desc->full_name() ) &&
          ( field->message_type()->full_name() == data_desc->full_name() ))
@@ -477,7 +477,7 @@ namespace crier {
       }
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::OnTransportConnect(){
     std::vector<std::function<void()>> socketOpenedObserverList;
@@ -496,20 +496,20 @@ namespace crier {
       }
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::OnTransportDisconnect(const std::string& err) {
     if(_supressNextTransportClosed) {
       _supressNextTransportClosed = false;
       return;
     }
-    
+
     std::vector<std::function<void(const std::string&)>> socketClosedObserverList;
     {
       std::lock_guard<std::mutex> guard(_transportClosedObserverMapMutex);
       socketClosedObserverList = mapToVectorCopy(_transportClosedObserverMap);
     }
-    
+
     if(_inboundDispatchTransportErrorSetting == InboundDispatching::DispatchQueue) {
       for (const auto& callback : socketClosedObserverList) {
         callOnMainThread([err, callback](){callback(err);});
@@ -520,7 +520,7 @@ namespace crier {
       }
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::treatQueuedMessagesForType(const std::string& ret_type) {
     std::deque<ProtoRootMsg> unhandledMessageAux;
@@ -529,19 +529,19 @@ namespace crier {
       unhandledMessageAux = std::move(_unhandledMessageQueue[ret_type]);
       _unhandledMessageQueue[ret_type].clear();
     }
-    
+
     for(const auto& queued_msg : unhandledMessageAux) {
       auto req_data = openReq(queued_msg);
       if(req_data != nullptr)
         receiveMessage(queued_msg, req_data);
     }
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   inline void Crier<Transport, ProtoRootMsg>::logEmptyMessageError() {
     std::cout << "[CRIER] ERROR: Couldn't Parse message it appears to have arrived empty" << std::endl;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   template <typename CallbackType>
   std::vector<CallbackType> Crier<Transport, ProtoRootMsg>::mapToVectorCopy(const CallbackMap<CallbackType>& source) {
@@ -552,12 +552,12 @@ namespace crier {
     }
     return retVal;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::SetCustomSerializationFun(const std::function<std::string(const ProtoRootMsg&)>& fun) {
     _custom_serialization_fun = fun;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::ClearCustomSerializationFun() {
     _custom_serialization_fun = nullptr;
@@ -567,7 +567,7 @@ namespace crier {
   void Crier<Transport, ProtoRootMsg>::SetCustomDeserializationFun(const std::function<ProtoRootMsg(const std::string&)>& fun) {
     _custom_deserialization_fun = fun;
   }
-  
+
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::ClearCustomDeserializationFun() {
     _custom_deserialization_fun = nullptr;
