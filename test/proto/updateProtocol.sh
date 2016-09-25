@@ -4,7 +4,7 @@
 
 inputFileDir="."
 inputFile="CrierTest.proto"
-outputDir="../src"
+outputDir="../src/protogen"
 
 echo "Updating Protocol"
 

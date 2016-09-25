@@ -1,21 +1,21 @@
-#ifndef TransportDummy_hpp
-#define TransportDummy_hpp
+#ifndef EchoTransport_hpp
+#define EchoTransport_hpp
 
 #include <string>
 #include <functional>
 
 #include "crier/TransportConcept.hpp"
 
-class DummyTransport : public crier::TransportConcept {
+class EchoTransport : public crier::TransportConcept {
 public:
   void connect(const std::string& host, int ip);
   void disconnect();
   bool isConnected();
-  
+
   void sendData(const std::string& data_to_send);
 
 private:
   bool _connected = false;
 };
 
-#endif /* TransportDummy_hpp */
+#endif /* EchoTransport_hpp */
