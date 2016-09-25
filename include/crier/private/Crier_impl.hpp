@@ -319,8 +319,9 @@ namespace crier {
 
   template <typename Transport, typename ProtoRootMsg>
   void Crier<Transport, ProtoRootMsg>::unhandledMessage(const ProtoRootMsg& r, const std::string& type, UnhandledMessageBehaviour behaviour) {
-    if(behaviour == UnhandledMessageBehaviour::Ignore)
-      std::cout << "[CRIER] ERROR: No temporary or permanent callback available to handle message of type " << type << std::endl;
+    if(behaviour == UnhandledMessageBehaviour::Ignore) {
+      // Do nothing
+    }
     else if(behaviour == UnhandledMessageBehaviour::Enqueue){
       std::lock_guard<std::mutex> guard(_unhandledMessageQueueMutex);
       _unhandledMessageQueue[type].push_back(r); // TODO NEEDS DEEP COPY
