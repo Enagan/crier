@@ -39,7 +39,7 @@ message test2 {
 /// Root message required for Crier to function
 /// Should be a message with optional fields for each other message defined in the protobuf file.
 /// You can have multiple "root_msg" in the same protobuf files, and the instance a different crier instance to work each different root message
-message root_msg { 
+message root_msg {
     optional test1 test1_field = 1; // Any message that isn't here won't be considered by the crier working with this root message
     optional test2 test2_field = 2; // Fields can have any name you want, you'll never directly interact with them.
 
@@ -50,8 +50,8 @@ message root_msg {
 ```
 
 - An implementation of the Transport API (found in Transport.hpp)
-To allow for freedom in how your application opens connections and sends data (tcp, udp, websocket, etc...) a class implementing the Transport API is required. 
-It should essentially follow a decorator pattern over the transport you want to use. 
+To allow for freedom in how your application opens connections and sends data (tcp, udp, websocket, etc...) a class implementing the Transport API is required.
+It should essentially follow a decorator pattern over the transport you want to use.
 You can then pass an initialized instance of this Transport over to crier upon initialization, or you can allow crier to allocate a default instance of your transport. In any of these cases, crier will have ownership of the instance.
 
 Both of these elements are what constitutes the templated parts of the crier class
@@ -82,7 +82,7 @@ crier_instance.sendMessage(message);
 example_proto::test1 message;
 message.set_id(1);
 
-crier_instance.sendMessageWithRetCallback<example_proto::test1, example_proto::test2>(message, 
+crier_instance.sendMessageWithRetCallback<example_proto::test1, example_proto::test2>(message,
     [](const example_proto::test2& response_msg){
         /// Do stuff to treat the response
         /// This will be called only if a response of this type (test2) arrives
@@ -94,7 +94,7 @@ crier_instance.sendMessageWithRetCallback<example_proto::test1, example_proto::t
 example_proto::test1 message;
 message.set_id(1);
 
-crier_instance.sendMessageWithRetCallbackAndTimeout<example_proto::test1, example_proto::test2>(message, 
+crier_instance.sendMessageWithRetCallbackAndTimeout<example_proto::test1, example_proto::test2>(message,
     [](const example_proto::test2& response_msg){
         /// Do stuff to treat the response
         /// This will be called only if a response of this type (test2) arrives
@@ -109,7 +109,7 @@ crier_instance.sendMessageWithRetCallbackAndTimeout<example_proto::test1, exampl
 - Register a permanent callback for a received message, not associated with any outbound message
 ```C++
 /// UNIQUE_ID is required to identify this callback for later removal. If the exact same id is used to register a callback to the exact same message, the previous callback will be overwritten
-crier_instance.registerPermanentCallback<example_proto::test2>("<UNIQUE_ID>", 
+crier_instance.registerPermanentCallback<example_proto::test2>("<UNIQUE_ID>",
     [](const example_proto::test2& msg) {
         /// This callback will be called every time a test2 message arrives
     });
@@ -118,6 +118,10 @@ crier_instance.clearPermanentCallback<example_proto::test2>("<UNIQUE_ID>"); /// 
 ```
 
 For more information on all of Crier's capabilities, check the header Crier.hpp for the full API documentation
+
+## Currently Working On:
+
+- Writting library tests, aiming towards full coverage
 
 ## Author
 
