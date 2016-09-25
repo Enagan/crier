@@ -34,20 +34,20 @@ void  protobuf_AddDesc_CrierTest_2eproto();
 void protobuf_AssignDesc_CrierTest_2eproto();
 void protobuf_ShutdownFile_CrierTest_2eproto();
 
-class ping;
-class pong;
+class test_msg_1;
+class test_msg_2;
 class root_msg;
 
 // ===================================================================
 
-class ping : public ::google::protobuf::Message {
+class test_msg_1 : public ::google::protobuf::Message {
  public:
-  ping();
-  virtual ~ping();
+  test_msg_1();
+  virtual ~test_msg_1();
 
-  ping(const ping& from);
+  test_msg_1(const test_msg_1& from);
 
-  inline ping& operator=(const ping& from) {
+  inline test_msg_1& operator=(const test_msg_1& from) {
     CopyFrom(from);
     return *this;
   }
@@ -61,17 +61,17 @@ class ping : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ping& default_instance();
+  static const test_msg_1& default_instance();
 
-  void Swap(ping* other);
+  void Swap(test_msg_1* other);
 
   // implements Message ----------------------------------------------
 
-  ping* New() const;
+  test_msg_1* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ping& from);
-  void MergeFrom(const ping& from);
+  void CopyFrom(const test_msg_1& from);
+  void MergeFrom(const test_msg_1& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -101,7 +101,7 @@ class ping : public ::google::protobuf::Message {
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // @@protoc_insertion_point(class_scope:crier.test.ping)
+  // @@protoc_insertion_point(class_scope:crier.test.test_msg_1)
  private:
   inline void set_has_id();
   inline void clear_has_id();
@@ -118,18 +118,18 @@ class ping : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_CrierTest_2eproto();
 
   void InitAsDefaultInstance();
-  static ping* default_instance_;
+  static test_msg_1* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class pong : public ::google::protobuf::Message {
+class test_msg_2 : public ::google::protobuf::Message {
  public:
-  pong();
-  virtual ~pong();
+  test_msg_2();
+  virtual ~test_msg_2();
 
-  pong(const pong& from);
+  test_msg_2(const test_msg_2& from);
 
-  inline pong& operator=(const pong& from) {
+  inline test_msg_2& operator=(const test_msg_2& from) {
     CopyFrom(from);
     return *this;
   }
@@ -143,17 +143,17 @@ class pong : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const pong& default_instance();
+  static const test_msg_2& default_instance();
 
-  void Swap(pong* other);
+  void Swap(test_msg_2* other);
 
   // implements Message ----------------------------------------------
 
-  pong* New() const;
+  test_msg_2* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const pong& from);
-  void MergeFrom(const pong& from);
+  void CopyFrom(const test_msg_2& from);
+  void MergeFrom(const test_msg_2& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -176,21 +176,26 @@ class pong : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required uint32 id = 1;
-  inline bool has_id() const;
-  inline void clear_id();
-  static const int kIdFieldNumber = 1;
-  inline ::google::protobuf::uint32 id() const;
-  inline void set_id(::google::protobuf::uint32 value);
+  // required string data = 1;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 1;
+  inline const ::std::string& data() const;
+  inline void set_data(const ::std::string& value);
+  inline void set_data(const char* value);
+  inline void set_data(const char* value, size_t size);
+  inline ::std::string* mutable_data();
+  inline ::std::string* release_data();
+  inline void set_allocated_data(::std::string* data);
 
-  // @@protoc_insertion_point(class_scope:crier.test.pong)
+  // @@protoc_insertion_point(class_scope:crier.test.test_msg_2)
  private:
-  inline void set_has_id();
-  inline void clear_has_id();
+  inline void set_has_data();
+  inline void clear_has_data();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::uint32 id_;
+  ::std::string* data_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -200,7 +205,7 @@ class pong : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_CrierTest_2eproto();
 
   void InitAsDefaultInstance();
-  static pong* default_instance_;
+  static test_msg_2* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -258,38 +263,35 @@ class root_msg : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .crier.test.ping ping_field = 10;
-  inline bool has_ping_field() const;
-  inline void clear_ping_field();
-  static const int kPingFieldFieldNumber = 10;
-  inline const ::crier::test::ping& ping_field() const;
-  inline ::crier::test::ping* mutable_ping_field();
-  inline ::crier::test::ping* release_ping_field();
-  inline void set_allocated_ping_field(::crier::test::ping* ping_field);
+  // optional .crier.test.test_msg_1 test_msg_1_field = 1;
+  inline bool has_test_msg_1_field() const;
+  inline void clear_test_msg_1_field();
+  static const int kTestMsg1FieldFieldNumber = 1;
+  inline const ::crier::test::test_msg_1& test_msg_1_field() const;
+  inline ::crier::test::test_msg_1* mutable_test_msg_1_field();
+  inline ::crier::test::test_msg_1* release_test_msg_1_field();
+  inline void set_allocated_test_msg_1_field(::crier::test::test_msg_1* test_msg_1_field);
 
-  // optional .crier.test.pong pong_field = 11;
-  inline bool has_pong_field() const;
-  inline void clear_pong_field();
-  static const int kPongFieldFieldNumber = 11;
-  inline const ::crier::test::pong& pong_field() const;
-  inline ::crier::test::pong* mutable_pong_field();
-  inline ::crier::test::pong* release_pong_field();
-  inline void set_allocated_pong_field(::crier::test::pong* pong_field);
+  // optional .crier.test.test_msg_2 test_msg_2_field = 2;
+  inline bool has_test_msg_2_field() const;
+  inline void clear_test_msg_2_field();
+  static const int kTestMsg2FieldFieldNumber = 2;
+  inline const ::crier::test::test_msg_2& test_msg_2_field() const;
+  inline ::crier::test::test_msg_2* mutable_test_msg_2_field();
+  inline ::crier::test::test_msg_2* release_test_msg_2_field();
+  inline void set_allocated_test_msg_2_field(::crier::test::test_msg_2* test_msg_2_field);
 
-  GOOGLE_PROTOBUF_EXTENSION_ACCESSORS(root_msg)
   // @@protoc_insertion_point(class_scope:crier.test.root_msg)
  private:
-  inline void set_has_ping_field();
-  inline void clear_has_ping_field();
-  inline void set_has_pong_field();
-  inline void clear_has_pong_field();
-
-  ::google::protobuf::internal::ExtensionSet _extensions_;
+  inline void set_has_test_msg_1_field();
+  inline void clear_has_test_msg_1_field();
+  inline void set_has_test_msg_2_field();
+  inline void clear_has_test_msg_2_field();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::crier::test::ping* ping_field_;
-  ::crier::test::pong* pong_field_;
+  ::crier::test::test_msg_1* test_msg_1_field_;
+  ::crier::test::test_msg_2* test_msg_2_field_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
@@ -306,133 +308,181 @@ class root_msg : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// ping
+// test_msg_1
 
 // required uint32 id = 1;
-inline bool ping::has_id() const {
+inline bool test_msg_1::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ping::set_has_id() {
+inline void test_msg_1::set_has_id() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ping::clear_has_id() {
+inline void test_msg_1::clear_has_id() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ping::clear_id() {
+inline void test_msg_1::clear_id() {
   id_ = 0u;
   clear_has_id();
 }
-inline ::google::protobuf::uint32 ping::id() const {
+inline ::google::protobuf::uint32 test_msg_1::id() const {
   return id_;
 }
-inline void ping::set_id(::google::protobuf::uint32 value) {
+inline void test_msg_1::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
 }
 
 // -------------------------------------------------------------------
 
-// pong
+// test_msg_2
 
-// required uint32 id = 1;
-inline bool pong::has_id() const {
+// required string data = 1;
+inline bool test_msg_2::has_data() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void pong::set_has_id() {
+inline void test_msg_2::set_has_data() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void pong::clear_has_id() {
+inline void test_msg_2::clear_has_data() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void pong::clear_id() {
-  id_ = 0u;
-  clear_has_id();
+inline void test_msg_2::clear_data() {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    data_->clear();
+  }
+  clear_has_data();
 }
-inline ::google::protobuf::uint32 pong::id() const {
-  return id_;
+inline const ::std::string& test_msg_2::data() const {
+  return *data_;
 }
-inline void pong::set_id(::google::protobuf::uint32 value) {
-  set_has_id();
-  id_ = value;
+inline void test_msg_2::set_data(const ::std::string& value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void test_msg_2::set_data(const char* value) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(value);
+}
+inline void test_msg_2::set_data(const char* value, size_t size) {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  data_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* test_msg_2::mutable_data() {
+  set_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    data_ = new ::std::string;
+  }
+  return data_;
+}
+inline ::std::string* test_msg_2::release_data() {
+  clear_has_data();
+  if (data_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = data_;
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void test_msg_2::set_allocated_data(::std::string* data) {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_;
+  }
+  if (data) {
+    set_has_data();
+    data_ = data;
+  } else {
+    clear_has_data();
+    data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
 }
 
 // -------------------------------------------------------------------
 
 // root_msg
 
-// optional .crier.test.ping ping_field = 10;
-inline bool root_msg::has_ping_field() const {
+// optional .crier.test.test_msg_1 test_msg_1_field = 1;
+inline bool root_msg::has_test_msg_1_field() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void root_msg::set_has_ping_field() {
+inline void root_msg::set_has_test_msg_1_field() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void root_msg::clear_has_ping_field() {
+inline void root_msg::clear_has_test_msg_1_field() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void root_msg::clear_ping_field() {
-  if (ping_field_ != NULL) ping_field_->::crier::test::ping::Clear();
-  clear_has_ping_field();
+inline void root_msg::clear_test_msg_1_field() {
+  if (test_msg_1_field_ != NULL) test_msg_1_field_->::crier::test::test_msg_1::Clear();
+  clear_has_test_msg_1_field();
 }
-inline const ::crier::test::ping& root_msg::ping_field() const {
-  return ping_field_ != NULL ? *ping_field_ : *default_instance_->ping_field_;
+inline const ::crier::test::test_msg_1& root_msg::test_msg_1_field() const {
+  return test_msg_1_field_ != NULL ? *test_msg_1_field_ : *default_instance_->test_msg_1_field_;
 }
-inline ::crier::test::ping* root_msg::mutable_ping_field() {
-  set_has_ping_field();
-  if (ping_field_ == NULL) ping_field_ = new ::crier::test::ping;
-  return ping_field_;
+inline ::crier::test::test_msg_1* root_msg::mutable_test_msg_1_field() {
+  set_has_test_msg_1_field();
+  if (test_msg_1_field_ == NULL) test_msg_1_field_ = new ::crier::test::test_msg_1;
+  return test_msg_1_field_;
 }
-inline ::crier::test::ping* root_msg::release_ping_field() {
-  clear_has_ping_field();
-  ::crier::test::ping* temp = ping_field_;
-  ping_field_ = NULL;
+inline ::crier::test::test_msg_1* root_msg::release_test_msg_1_field() {
+  clear_has_test_msg_1_field();
+  ::crier::test::test_msg_1* temp = test_msg_1_field_;
+  test_msg_1_field_ = NULL;
   return temp;
 }
-inline void root_msg::set_allocated_ping_field(::crier::test::ping* ping_field) {
-  delete ping_field_;
-  ping_field_ = ping_field;
-  if (ping_field) {
-    set_has_ping_field();
+inline void root_msg::set_allocated_test_msg_1_field(::crier::test::test_msg_1* test_msg_1_field) {
+  delete test_msg_1_field_;
+  test_msg_1_field_ = test_msg_1_field;
+  if (test_msg_1_field) {
+    set_has_test_msg_1_field();
   } else {
-    clear_has_ping_field();
+    clear_has_test_msg_1_field();
   }
 }
 
-// optional .crier.test.pong pong_field = 11;
-inline bool root_msg::has_pong_field() const {
+// optional .crier.test.test_msg_2 test_msg_2_field = 2;
+inline bool root_msg::has_test_msg_2_field() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void root_msg::set_has_pong_field() {
+inline void root_msg::set_has_test_msg_2_field() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void root_msg::clear_has_pong_field() {
+inline void root_msg::clear_has_test_msg_2_field() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void root_msg::clear_pong_field() {
-  if (pong_field_ != NULL) pong_field_->::crier::test::pong::Clear();
-  clear_has_pong_field();
+inline void root_msg::clear_test_msg_2_field() {
+  if (test_msg_2_field_ != NULL) test_msg_2_field_->::crier::test::test_msg_2::Clear();
+  clear_has_test_msg_2_field();
 }
-inline const ::crier::test::pong& root_msg::pong_field() const {
-  return pong_field_ != NULL ? *pong_field_ : *default_instance_->pong_field_;
+inline const ::crier::test::test_msg_2& root_msg::test_msg_2_field() const {
+  return test_msg_2_field_ != NULL ? *test_msg_2_field_ : *default_instance_->test_msg_2_field_;
 }
-inline ::crier::test::pong* root_msg::mutable_pong_field() {
-  set_has_pong_field();
-  if (pong_field_ == NULL) pong_field_ = new ::crier::test::pong;
-  return pong_field_;
+inline ::crier::test::test_msg_2* root_msg::mutable_test_msg_2_field() {
+  set_has_test_msg_2_field();
+  if (test_msg_2_field_ == NULL) test_msg_2_field_ = new ::crier::test::test_msg_2;
+  return test_msg_2_field_;
 }
-inline ::crier::test::pong* root_msg::release_pong_field() {
-  clear_has_pong_field();
-  ::crier::test::pong* temp = pong_field_;
-  pong_field_ = NULL;
+inline ::crier::test::test_msg_2* root_msg::release_test_msg_2_field() {
+  clear_has_test_msg_2_field();
+  ::crier::test::test_msg_2* temp = test_msg_2_field_;
+  test_msg_2_field_ = NULL;
   return temp;
 }
-inline void root_msg::set_allocated_pong_field(::crier::test::pong* pong_field) {
-  delete pong_field_;
-  pong_field_ = pong_field;
-  if (pong_field) {
-    set_has_pong_field();
+inline void root_msg::set_allocated_test_msg_2_field(::crier::test::test_msg_2* test_msg_2_field) {
+  delete test_msg_2_field_;
+  test_msg_2_field_ = test_msg_2_field;
+  if (test_msg_2_field) {
+    set_has_test_msg_2_field();
   } else {
-    clear_has_pong_field();
+    clear_has_test_msg_2_field();
   }
 }
 

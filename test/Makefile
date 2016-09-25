@@ -16,7 +16,7 @@ INCL_PATH = src
 # Space-separated pkg-config libraries used by this project
 LIBS =
 # libs to compile with
-RAW_LIBS = -lprotobuf
+RAW_LIBS = -lprotobuf -lpthread
 # General compiler flags
 COMPILE_FLAGS = -std=c++14 -Wall -Wextra -Werror -g
 # Additional release-specific flags

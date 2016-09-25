@@ -1,17 +1,13 @@
 /// Test Protocol File
 package crier.test;
 
-message ping {
-    required uint32 id = 1;                     /// Sequence number 
+message test_msg_1 {
+    required uint32 id = 1;
 }
-
-message pong {
-    required uint32 id = 1;                     /// Sequence number reply
+message test_msg_2 {
+    required string data = 1;
 }
-
-message root_msg { 
-    optional ping ping_field = 10;              
-    optional pong pong_field = 11;
-
-    extensions 100 to max;
+message root_msg {
+    optional test_msg_1 test_msg_1_field = 1;
+    optional test_msg_2 test_msg_2_field = 2;
 }

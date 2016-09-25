@@ -21,12 +21,12 @@ namespace test {
 
 namespace {
 
-const ::google::protobuf::Descriptor* ping_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* test_msg_1_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  ping_reflection_ = NULL;
-const ::google::protobuf::Descriptor* pong_descriptor_ = NULL;
+  test_msg_1_reflection_ = NULL;
+const ::google::protobuf::Descriptor* test_msg_2_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  pong_reflection_ = NULL;
+  test_msg_2_reflection_ = NULL;
 const ::google::protobuf::Descriptor* root_msg_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   root_msg_reflection_ = NULL;
@@ -40,40 +40,40 @@ void protobuf_AssignDesc_CrierTest_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "CrierTest.proto");
   GOOGLE_CHECK(file != NULL);
-  ping_descriptor_ = file->message_type(0);
-  static const int ping_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ping, id_),
+  test_msg_1_descriptor_ = file->message_type(0);
+  static const int test_msg_1_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(test_msg_1, id_),
   };
-  ping_reflection_ =
+  test_msg_1_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      ping_descriptor_,
-      ping::default_instance_,
-      ping_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ping, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ping, _unknown_fields_),
+      test_msg_1_descriptor_,
+      test_msg_1::default_instance_,
+      test_msg_1_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(test_msg_1, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(test_msg_1, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ping));
-  pong_descriptor_ = file->message_type(1);
-  static const int pong_offsets_[1] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(pong, id_),
+      sizeof(test_msg_1));
+  test_msg_2_descriptor_ = file->message_type(1);
+  static const int test_msg_2_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(test_msg_2, data_),
   };
-  pong_reflection_ =
+  test_msg_2_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      pong_descriptor_,
-      pong::default_instance_,
-      pong_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(pong, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(pong, _unknown_fields_),
+      test_msg_2_descriptor_,
+      test_msg_2::default_instance_,
+      test_msg_2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(test_msg_2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(test_msg_2, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(pong));
+      sizeof(test_msg_2));
   root_msg_descriptor_ = file->message_type(2);
   static const int root_msg_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, ping_field_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, pong_field_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, test_msg_1_field_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, test_msg_2_field_),
   };
   root_msg_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -82,7 +82,7 @@ void protobuf_AssignDesc_CrierTest_2eproto() {
       root_msg_offsets_,
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, _has_bits_[0]),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, _unknown_fields_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(root_msg, _extensions_),
+      -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(root_msg));
@@ -99,9 +99,9 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ping_descriptor_, &ping::default_instance());
+    test_msg_1_descriptor_, &test_msg_1::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    pong_descriptor_, &pong::default_instance());
+    test_msg_2_descriptor_, &test_msg_2::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     root_msg_descriptor_, &root_msg::default_instance());
 }
@@ -109,10 +109,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_CrierTest_2eproto() {
-  delete ping::default_instance_;
-  delete ping_reflection_;
-  delete pong::default_instance_;
-  delete pong_reflection_;
+  delete test_msg_1::default_instance_;
+  delete test_msg_1_reflection_;
+  delete test_msg_2::default_instance_;
+  delete test_msg_2_reflection_;
   delete root_msg::default_instance_;
   delete root_msg_reflection_;
 }
@@ -124,18 +124,18 @@ void protobuf_AddDesc_CrierTest_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\017CrierTest.proto\022\ncrier.test\"\022\n\004ping\022\n\n"
-    "\002id\030\001 \002(\r\"\022\n\004pong\022\n\n\002id\030\001 \002(\r\"`\n\010root_ms"
-    "g\022$\n\nping_field\030\n \001(\0132\020.crier.test.ping\022"
-    "$\n\npong_field\030\013 \001(\0132\020.crier.test.pong*\010\010"
-    "d\020\200\200\200\200\002", 167);
+    "\n\017CrierTest.proto\022\ncrier.test\"\030\n\ntest_ms"
+    "g_1\022\n\n\002id\030\001 \002(\r\"\032\n\ntest_msg_2\022\014\n\004data\030\001 "
+    "\002(\t\"n\n\010root_msg\0220\n\020test_msg_1_field\030\001 \001("
+    "\0132\026.crier.test.test_msg_1\0220\n\020test_msg_2_"
+    "field\030\002 \001(\0132\026.crier.test.test_msg_2", 195);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "CrierTest.proto", &protobuf_RegisterTypes);
-  ping::default_instance_ = new ping();
-  pong::default_instance_ = new pong();
+  test_msg_1::default_instance_ = new test_msg_1();
+  test_msg_2::default_instance_ = new test_msg_2();
   root_msg::default_instance_ = new root_msg();
-  ping::default_instance_->InitAsDefaultInstance();
-  pong::default_instance_->InitAsDefaultInstance();
+  test_msg_1::default_instance_->InitAsDefaultInstance();
+  test_msg_2::default_instance_->InitAsDefaultInstance();
   root_msg::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_CrierTest_2eproto);
 }
@@ -150,60 +150,60 @@ struct StaticDescriptorInitializer_CrierTest_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ping::kIdFieldNumber;
+const int test_msg_1::kIdFieldNumber;
 #endif  // !_MSC_VER
 
-ping::ping()
+test_msg_1::test_msg_1()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void ping::InitAsDefaultInstance() {
+void test_msg_1::InitAsDefaultInstance() {
 }
 
-ping::ping(const ping& from)
+test_msg_1::test_msg_1(const test_msg_1& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void ping::SharedCtor() {
+void test_msg_1::SharedCtor() {
   _cached_size_ = 0;
   id_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-ping::~ping() {
+test_msg_1::~test_msg_1() {
   SharedDtor();
 }
 
-void ping::SharedDtor() {
+void test_msg_1::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void ping::SetCachedSize(int size) const {
+void test_msg_1::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* ping::descriptor() {
+const ::google::protobuf::Descriptor* test_msg_1::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ping_descriptor_;
+  return test_msg_1_descriptor_;
 }
 
-const ping& ping::default_instance() {
+const test_msg_1& test_msg_1::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_CrierTest_2eproto();
   return *default_instance_;
 }
 
-ping* ping::default_instance_ = NULL;
+test_msg_1* test_msg_1::default_instance_ = NULL;
 
-ping* ping::New() const {
-  return new ping;
+test_msg_1* test_msg_1::New() const {
+  return new test_msg_1;
 }
 
-void ping::Clear() {
+void test_msg_1::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     id_ = 0u;
   }
@@ -211,7 +211,7 @@ void ping::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool ping::MergePartialFromCodedStream(
+bool test_msg_1::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
@@ -248,7 +248,7 @@ bool ping::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void ping::SerializeWithCachedSizes(
+void test_msg_1::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // required uint32 id = 1;
   if (has_id()) {
@@ -261,7 +261,7 @@ void ping::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* ping::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* test_msg_1::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // required uint32 id = 1;
   if (has_id()) {
@@ -275,7 +275,7 @@ void ping::SerializeWithCachedSizes(
   return target;
 }
 
-int ping::ByteSize() const {
+int test_msg_1::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -298,10 +298,10 @@ int ping::ByteSize() const {
   return total_size;
 }
 
-void ping::MergeFrom(const ::google::protobuf::Message& from) {
+void test_msg_1::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const ping* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ping*>(
+  const test_msg_1* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const test_msg_1*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -310,7 +310,7 @@ void ping::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void ping::MergeFrom(const ping& from) {
+void test_msg_1::MergeFrom(const test_msg_1& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
@@ -320,25 +320,25 @@ void ping::MergeFrom(const ping& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void ping::CopyFrom(const ::google::protobuf::Message& from) {
+void test_msg_1::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ping::CopyFrom(const ping& from) {
+void test_msg_1::CopyFrom(const test_msg_1& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ping::IsInitialized() const {
+bool test_msg_1::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
-void ping::Swap(ping* other) {
+void test_msg_1::Swap(test_msg_1* other) {
   if (other != this) {
     std::swap(id_, other->id_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
@@ -347,11 +347,11 @@ void ping::Swap(ping* other) {
   }
 }
 
-::google::protobuf::Metadata ping::GetMetadata() const {
+::google::protobuf::Metadata test_msg_1::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ping_descriptor_;
-  metadata.reflection = ping_reflection_;
+  metadata.descriptor = test_msg_1_descriptor_;
+  metadata.reflection = test_msg_1_reflection_;
   return metadata;
 }
 
@@ -359,81 +359,89 @@ void ping::Swap(ping* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int pong::kIdFieldNumber;
+const int test_msg_2::kDataFieldNumber;
 #endif  // !_MSC_VER
 
-pong::pong()
+test_msg_2::test_msg_2()
   : ::google::protobuf::Message() {
   SharedCtor();
 }
 
-void pong::InitAsDefaultInstance() {
+void test_msg_2::InitAsDefaultInstance() {
 }
 
-pong::pong(const pong& from)
+test_msg_2::test_msg_2(const test_msg_2& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
 }
 
-void pong::SharedCtor() {
+void test_msg_2::SharedCtor() {
   _cached_size_ = 0;
-  id_ = 0u;
+  data_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-pong::~pong() {
+test_msg_2::~test_msg_2() {
   SharedDtor();
 }
 
-void pong::SharedDtor() {
+void test_msg_2::SharedDtor() {
+  if (data_ != &::google::protobuf::internal::kEmptyString) {
+    delete data_;
+  }
   if (this != default_instance_) {
   }
 }
 
-void pong::SetCachedSize(int size) const {
+void test_msg_2::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* pong::descriptor() {
+const ::google::protobuf::Descriptor* test_msg_2::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return pong_descriptor_;
+  return test_msg_2_descriptor_;
 }
 
-const pong& pong::default_instance() {
+const test_msg_2& test_msg_2::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_CrierTest_2eproto();
   return *default_instance_;
 }
 
-pong* pong::default_instance_ = NULL;
+test_msg_2* test_msg_2::default_instance_ = NULL;
 
-pong* pong::New() const {
-  return new pong;
+test_msg_2* test_msg_2::New() const {
+  return new test_msg_2;
 }
 
-void pong::Clear() {
+void test_msg_2::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    id_ = 0u;
+    if (has_data()) {
+      if (data_ != &::google::protobuf::internal::kEmptyString) {
+        data_->clear();
+      }
+    }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool pong::MergePartialFromCodedStream(
+bool test_msg_2::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) return false
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required uint32 id = 1;
+      // required string data = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &id_)));
-          set_has_id();
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_data()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+            this->data().data(), this->data().length(),
+            ::google::protobuf::internal::WireFormat::PARSE);
         } else {
           goto handle_uninterpreted;
         }
@@ -457,11 +465,15 @@ bool pong::MergePartialFromCodedStream(
 #undef DO_
 }
 
-void pong::SerializeWithCachedSizes(
+void test_msg_2::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required uint32 id = 1;
-  if (has_id()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
+  // required string data = 1;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->data().data(), this->data().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      1, this->data(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -470,11 +482,16 @@ void pong::SerializeWithCachedSizes(
   }
 }
 
-::google::protobuf::uint8* pong::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* test_msg_2::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // required uint32 id = 1;
-  if (has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
+  // required string data = 1;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8String(
+      this->data().data(), this->data().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE);
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->data(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -484,15 +501,15 @@ void pong::SerializeWithCachedSizes(
   return target;
 }
 
-int pong::ByteSize() const {
+int test_msg_2::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required uint32 id = 1;
-    if (has_id()) {
+    // required string data = 1;
+    if (has_data()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->id());
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->data());
     }
 
   }
@@ -507,10 +524,10 @@ int pong::ByteSize() const {
   return total_size;
 }
 
-void pong::MergeFrom(const ::google::protobuf::Message& from) {
+void test_msg_2::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const pong* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const pong*>(
+  const test_msg_2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const test_msg_2*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -519,48 +536,48 @@ void pong::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void pong::MergeFrom(const pong& from) {
+void test_msg_2::MergeFrom(const test_msg_2& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_id()) {
-      set_id(from.id());
+    if (from.has_data()) {
+      set_data(from.data());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void pong::CopyFrom(const ::google::protobuf::Message& from) {
+void test_msg_2::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void pong::CopyFrom(const pong& from) {
+void test_msg_2::CopyFrom(const test_msg_2& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool pong::IsInitialized() const {
+bool test_msg_2::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   return true;
 }
 
-void pong::Swap(pong* other) {
+void test_msg_2::Swap(test_msg_2* other) {
   if (other != this) {
-    std::swap(id_, other->id_);
+    std::swap(data_, other->data_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata pong::GetMetadata() const {
+::google::protobuf::Metadata test_msg_2::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = pong_descriptor_;
-  metadata.reflection = pong_reflection_;
+  metadata.descriptor = test_msg_2_descriptor_;
+  metadata.reflection = test_msg_2_reflection_;
   return metadata;
 }
 
@@ -568,8 +585,8 @@ void pong::Swap(pong* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int root_msg::kPingFieldFieldNumber;
-const int root_msg::kPongFieldFieldNumber;
+const int root_msg::kTestMsg1FieldFieldNumber;
+const int root_msg::kTestMsg2FieldFieldNumber;
 #endif  // !_MSC_VER
 
 root_msg::root_msg()
@@ -578,8 +595,8 @@ root_msg::root_msg()
 }
 
 void root_msg::InitAsDefaultInstance() {
-  ping_field_ = const_cast< ::crier::test::ping*>(&::crier::test::ping::default_instance());
-  pong_field_ = const_cast< ::crier::test::pong*>(&::crier::test::pong::default_instance());
+  test_msg_1_field_ = const_cast< ::crier::test::test_msg_1*>(&::crier::test::test_msg_1::default_instance());
+  test_msg_2_field_ = const_cast< ::crier::test::test_msg_2*>(&::crier::test::test_msg_2::default_instance());
 }
 
 root_msg::root_msg(const root_msg& from)
@@ -590,8 +607,8 @@ root_msg::root_msg(const root_msg& from)
 
 void root_msg::SharedCtor() {
   _cached_size_ = 0;
-  ping_field_ = NULL;
-  pong_field_ = NULL;
+  test_msg_1_field_ = NULL;
+  test_msg_2_field_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -601,8 +618,8 @@ root_msg::~root_msg() {
 
 void root_msg::SharedDtor() {
   if (this != default_instance_) {
-    delete ping_field_;
-    delete pong_field_;
+    delete test_msg_1_field_;
+    delete test_msg_2_field_;
   }
 }
 
@@ -628,13 +645,12 @@ root_msg* root_msg::New() const {
 }
 
 void root_msg::Clear() {
-  _extensions_.Clear();
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_ping_field()) {
-      if (ping_field_ != NULL) ping_field_->::crier::test::ping::Clear();
+    if (has_test_msg_1_field()) {
+      if (test_msg_1_field_ != NULL) test_msg_1_field_->::crier::test::test_msg_1::Clear();
     }
-    if (has_pong_field()) {
-      if (pong_field_ != NULL) pong_field_->::crier::test::pong::Clear();
+    if (has_test_msg_2_field()) {
+      if (test_msg_2_field_ != NULL) test_msg_2_field_->::crier::test::test_msg_2::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -647,26 +663,26 @@ bool root_msg::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .crier.test.ping ping_field = 10;
-      case 10: {
+      // optional .crier.test.test_msg_1 test_msg_1_field = 1;
+      case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_ping_field()));
+               input, mutable_test_msg_1_field()));
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(90)) goto parse_pong_field;
+        if (input->ExpectTag(18)) goto parse_test_msg_2_field;
         break;
       }
 
-      // optional .crier.test.pong pong_field = 11;
-      case 11: {
+      // optional .crier.test.test_msg_2 test_msg_2_field = 2;
+      case 2: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_pong_field:
+         parse_test_msg_2_field:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_pong_field()));
+               input, mutable_test_msg_2_field()));
         } else {
           goto handle_uninterpreted;
         }
@@ -680,11 +696,6 @@ bool root_msg::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           return true;
         }
-        if ((800u <= tag)) {
-          DO_(_extensions_.ParseField(tag, input, default_instance_,
-                                      mutable_unknown_fields()));
-          continue;
-        }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
               input, tag, mutable_unknown_fields()));
         break;
@@ -697,21 +708,17 @@ bool root_msg::MergePartialFromCodedStream(
 
 void root_msg::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional .crier.test.ping ping_field = 10;
-  if (has_ping_field()) {
+  // optional .crier.test.test_msg_1 test_msg_1_field = 1;
+  if (has_test_msg_1_field()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, this->ping_field(), output);
+      1, this->test_msg_1_field(), output);
   }
 
-  // optional .crier.test.pong pong_field = 11;
-  if (has_pong_field()) {
+  // optional .crier.test.test_msg_2 test_msg_2_field = 2;
+  if (has_test_msg_2_field()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, this->pong_field(), output);
+      2, this->test_msg_2_field(), output);
   }
-
-  // Extension range [100, 536870912)
-  _extensions_.SerializeWithCachedSizes(
-      100, 536870912, output);
 
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
@@ -721,23 +728,19 @@ void root_msg::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* root_msg::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // optional .crier.test.ping ping_field = 10;
-  if (has_ping_field()) {
+  // optional .crier.test.test_msg_1 test_msg_1_field = 1;
+  if (has_test_msg_1_field()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        10, this->ping_field(), target);
+        1, this->test_msg_1_field(), target);
   }
 
-  // optional .crier.test.pong pong_field = 11;
-  if (has_pong_field()) {
+  // optional .crier.test.test_msg_2 test_msg_2_field = 2;
+  if (has_test_msg_2_field()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        11, this->pong_field(), target);
+        2, this->test_msg_2_field(), target);
   }
-
-  // Extension range [100, 536870912)
-  target = _extensions_.SerializeWithCachedSizesToArray(
-      100, 536870912, target);
 
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -750,23 +753,21 @@ int root_msg::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .crier.test.ping ping_field = 10;
-    if (has_ping_field()) {
+    // optional .crier.test.test_msg_1 test_msg_1_field = 1;
+    if (has_test_msg_1_field()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->ping_field());
+          this->test_msg_1_field());
     }
 
-    // optional .crier.test.pong pong_field = 11;
-    if (has_pong_field()) {
+    // optional .crier.test.test_msg_2 test_msg_2_field = 2;
+    if (has_test_msg_2_field()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->pong_field());
+          this->test_msg_2_field());
     }
 
   }
-  total_size += _extensions_.ByteSize();
-
   if (!unknown_fields().empty()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
@@ -793,14 +794,13 @@ void root_msg::MergeFrom(const ::google::protobuf::Message& from) {
 void root_msg::MergeFrom(const root_msg& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_ping_field()) {
-      mutable_ping_field()->::crier::test::ping::MergeFrom(from.ping_field());
+    if (from.has_test_msg_1_field()) {
+      mutable_test_msg_1_field()->::crier::test::test_msg_1::MergeFrom(from.test_msg_1_field());
     }
-    if (from.has_pong_field()) {
-      mutable_pong_field()->::crier::test::pong::MergeFrom(from.pong_field());
+    if (from.has_test_msg_2_field()) {
+      mutable_test_msg_2_field()->::crier::test::test_msg_2::MergeFrom(from.test_msg_2_field());
     }
   }
-  _extensions_.MergeFrom(from._extensions_);
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
@@ -818,24 +818,22 @@ void root_msg::CopyFrom(const root_msg& from) {
 
 bool root_msg::IsInitialized() const {
 
-  if (has_ping_field()) {
-    if (!this->ping_field().IsInitialized()) return false;
+  if (has_test_msg_1_field()) {
+    if (!this->test_msg_1_field().IsInitialized()) return false;
   }
-  if (has_pong_field()) {
-    if (!this->pong_field().IsInitialized()) return false;
+  if (has_test_msg_2_field()) {
+    if (!this->test_msg_2_field().IsInitialized()) return false;
   }
-
-  if (!_extensions_.IsInitialized()) return false;  return true;
+  return true;
 }
 
 void root_msg::Swap(root_msg* other) {
   if (other != this) {
-    std::swap(ping_field_, other->ping_field_);
-    std::swap(pong_field_, other->pong_field_);
+    std::swap(test_msg_1_field_, other->test_msg_1_field_);
+    std::swap(test_msg_2_field_, other->test_msg_2_field_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
-    _extensions_.Swap(&other->_extensions_);
   }
 }
 
