@@ -34,6 +34,11 @@ namespace crier {
       if(thread.joinable()) thread.join();
     }
   }
+  
+  template <typename Transport, typename ProtoRootMsg>
+  const Transport& Crier<Transport, ProtoRootMsg>::ctransport() const {
+    return *_transport;
+  }
 
   template <typename Transport, typename ProtoRootMsg>
   Transport& Crier<Transport, ProtoRootMsg>::transport() {
