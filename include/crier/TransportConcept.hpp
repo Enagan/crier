@@ -22,7 +22,7 @@ namespace crier {
     virtual void disconnect() = 0;
 
     /// Will be called by crier whenever you call it's 'transportConnected()' method. Should return true if your transport is ready for communication
-    virtual bool isConnected() = 0;
+    virtual bool isConnected() const = 0;
 
     /// Will be called by crier whenever it needs to send post serialization data to the transport. (after you call the 'sendMessage' method, for example)
     virtual void sendData(const std::string& data_to_send) = 0;

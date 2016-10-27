@@ -78,6 +78,8 @@ namespace crier {
     /// Returns true if the Transport has an active connection, false otherwise (will call the void 'bool isConnected()' on your Transport concept implementation)
     bool transportConnected() const;
 
+    /// Gets a const reference to the crier managed transport instance. Usefull if you need to fetch information from it
+    const Transport& ctransport() const;
     /// Gets a reference to the crier managed transport instance. Typically you shouldn't mess with it during regular usage, but it's available for edge cases
     Transport& transport();
 
