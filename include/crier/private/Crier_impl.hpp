@@ -383,9 +383,10 @@ namespace crier {
     // This has some unexpected behaviour: if there are two requests made in succession, the first without a callback and the second with a callback,
     // then the calback will be used for the first request and not for the second
     if(_callbackMap[type].size() > 0) {
-      _callbackMap[type].front()(received_msg);
+      auto callback = _callbackMap[type].front();
       _callbackMap[type].pop_front();
       _callbackMapMutex.unlock();     // UNLOCK _callbackMapMutex
+      callback(received_msg);
       no_callbacks = false;
     } else {
       _callbackMapMutex.unlock();
